@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReformeViewDlg" widgetVar="ReformeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewReformeTitle}">
+            <h:form id="ReformeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reformeController.selected != null}">
+                        <h:outputText value="#{msg.ViewReformeLabel_idArrondissement}"/>
+                        <h:outputText value="#{reformeController.selected.idArrondissement}" title="#{msg.ViewReformeTitle_idArrondissement}"/>
+                        <h:outputText value="#{msg.ViewReformeLabel_datemisereforme}"/>
+                        <h:outputText value="#{reformeController.selected.datemisereforme}" title="#{msg.ViewReformeTitle_datemisereforme}"/>
+                        <h:outputText value="#{msg.ViewReformeLabel_datevente}"/>
+                        <h:outputText value="#{reformeController.selected.datevente}" title="#{msg.ViewReformeTitle_datevente}"/>
+                        <h:outputText value="#{msg.ViewReformeLabel_montantvente}"/>
+                        <h:outputText value="#{reformeController.selected.montantvente}" title="#{msg.ViewReformeTitle_montantvente}"/>
+                        <h:outputText value="#{msg.ViewReformeLabel_vendu}"/>
+                        <p:selectBooleanCheckbox value="#{reformeController.selected.vendu}" disabled="true"/>
+                        <h:outputText value="#{msg.ViewReformeLabel_idVehicule}"/>
+                        <h:outputText value="#{reformeController.selected.idVehicule}" title="#{msg.ViewReformeTitle_idVehicule}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="ReformeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AttributionCreateDlg" widgetVar="AttributionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateAttributionTitle}">
+            <h:form id="AttributionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{attributionController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_idAttribution}" for="idAttribution" />
+                        <p:inputText id="idAttribution" value="#{attributionController.selected.idAttribution}" title="#{msg.CreateAttributionTitle_idAttribution}" required="true" requiredMessage="#{msg.CreateAttributionRequiredMessage_idAttribution}"/>
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_dateattribution}" for="dateattribution" />
+                        <p:calendar id="dateattribution" pattern="MM/dd/yyyy" value="#{attributionController.selected.dateattribution}" title="#{msg.EditAttributionTitle_dateattribution}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_daterestitution}" for="daterestitution" />
+                        <p:calendar id="daterestitution" pattern="MM/dd/yyyy" value="#{attributionController.selected.daterestitution}" title="#{msg.EditAttributionTitle_daterestitution}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_datesyst}" for="datesyst" />
+                        <p:calendar id="datesyst" pattern="MM/dd/yyyy" value="#{attributionController.selected.datesyst}" title="#{msg.EditAttributionTitle_datesyst}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_idVehicule}" for="idVehicule" />
+                        <p:selectOneMenu id="idVehicule" value="#{attributionController.selected.idVehicule}" >
+                            <f:selectItems value="#{vehiculeController.itemsAvailableSelectOne}"
+                                           var="idVehiculeItem"
+                                           itemValue="#{idVehiculeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateAttributionLabel_idPersonnel}" for="idPersonnel" />
+                        <p:selectOneMenu id="idPersonnel" value="#{attributionController.selected.idPersonnel}" >
+                            <f:selectItems value="#{personnelController.itemsAvailableSelectOne}"
+                                           var="idPersonnelItem"
+                                           itemValue="#{idPersonnelItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{attributionController.create}" value="#{msg.Save}" update="display,:AttributionListForm:datalist,:growl" oncomplete="handleSubmit(args,'AttributionCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="AttributionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

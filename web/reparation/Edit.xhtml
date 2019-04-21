@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReparationEditDlg" widgetVar="ReparationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.EditReparationTitle}">
+            <h:form id="ReparationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reparationController.selected != null}">
+                        <p:outputLabel value="#{msg.EditReparationLabel_idReparation}" for="idReparation" />
+                        <p:inputText id="idReparation" value="#{reparationController.selected.idReparation}" title="#{msg.EditReparationTitle_idReparation}" required="true" requiredMessage="#{msg.EditReparationRequiredMessage_idReparation}"/>
+                        <p:outputLabel value="#{msg.EditReparationLabel_datereparation}" for="datereparation" />
+                        <p:calendar id="datereparation" pattern="MM/dd/yyyy" value="#{reparationController.selected.datereparation}" title="#{msg.EditReparationTitle_datereparation}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditReparationLabel_coutreparation}" for="coutreparation" />
+                        <p:inputText id="coutreparation" value="#{reparationController.selected.coutreparation}" title="#{msg.EditReparationTitle_coutreparation}" />
+                        <p:outputLabel value="#{msg.EditReparationLabel_immobilisation}" for="immobilisation" />
+                        <p:inputText id="immobilisation" value="#{reparationController.selected.immobilisation}" title="#{msg.EditReparationTitle_immobilisation}" />
+                        <p:outputLabel value="#{msg.EditReparationLabel_datedebut}" for="datedebut" />
+                        <p:calendar id="datedebut" pattern="MM/dd/yyyy" value="#{reparationController.selected.datedebut}" title="#{msg.EditReparationTitle_datedebut}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditReparationLabel_datefin}" for="datefin" />
+                        <p:calendar id="datefin" pattern="MM/dd/yyyy" value="#{reparationController.selected.datefin}" title="#{msg.EditReparationTitle_datefin}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditReparationLabel_commentaire}" for="commentaire" />
+                        <p:inputText id="commentaire" value="#{reparationController.selected.commentaire}" title="#{msg.EditReparationTitle_commentaire}" />
+                        <p:outputLabel value="#{msg.EditReparationLabel_idVehicule}" for="idVehicule" />
+                        <p:selectOneMenu id="idVehicule" value="#{reparationController.selected.idVehicule}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculeController.itemsAvailableSelectOne}"
+                                           var="idVehiculeItem"
+                                           itemValue="#{idVehiculeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditReparationLabel_idTypereparation}" for="idTypereparation" />
+                        <p:selectOneMenu id="idTypereparation" value="#{reparationController.selected.idTypereparation}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{typereparationController.itemsAvailableSelectOne}"
+                                           var="idTypereparationItem"
+                                           itemValue="#{idTypereparationItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditReparationLabel_idGarage}" for="idGarage" />
+                        <p:selectOneMenu id="idGarage" value="#{reparationController.selected.idGarage}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{garageController.itemsAvailableSelectOne}"
+                                           var="idGarageItem"
+                                           itemValue="#{idGarageItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reparationController.update}" value="#{msg.Save}" update="display,:ReparationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReparationEditDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="ReparationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

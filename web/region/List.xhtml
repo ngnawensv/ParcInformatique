@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/gpa.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{msg.ListRegionTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="RegionListForm">
+                <p:growl id="growl" showDetail="true"/>
+                <p:panel>
+                    <p:dataTable id="datalist" value="#{regionController.items}" var="item"
+                                 selectionMode="single" selection="#{regionController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idRegion}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rowIndexVar="index"
+                                 emptyMessage="#{msg.Vide}"
+                                 widgetVar="regionTable"
+                                 draggableColumns="true"
+                                 resizableColumns="true"
+                                 >
+
+                        <f:facet name="header"> 
+                            <h:outputText value="#{msg.ListRegionTitle}"/>
+                            <p:outputPanel style="text-align: right;">  
+                                <p:inputText id="globalFilter" onkeyup="regionTable.filter()" style="width:250px;" placeholder="Recherche" />
+                            </p:outputPanel>  
+                        </f:facet> 
+
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="colResize" update=":RegionListForm:growl" listener="#{regionController.onResize}" />  
+
+
+                        <p:column style="width: 50px !important; background-color: floralwhite; overflow: visible !important; padding: 2px !important;">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>                        
+                        
+                        <p:column sortBy="#{item.idPays.nom}" filterBy="#{item.idPays.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Pays}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPays.nom}"/>
+                        </p:column>
+                        
+                        <p:column sortBy="#{item.nom}" filterBy="#{item.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Region}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{msg.Create}" actionListener="#{regionController.prepareCreate}" update=":RegionCreateForm" oncomplete="PF('RegionCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{msg.View}" update=":RegionViewForm" oncomplete="PF('RegionViewDialog').show()" disabled="#{empty regionController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{msg.Edit}" update=":RegionEditForm" oncomplete="PF('RegionEditDialog').show()" disabled="#{empty regionController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{msg.Delete}" actionListener="#{regionController.destroy}" update=":growl,datalist" disabled="#{empty regionController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

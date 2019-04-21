@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonnelViewDlg" widgetVar="PersonnelViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewPersonnelTitle}">
+            <h:form id="PersonnelViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personnelController.selected != null}">
+                        <h:outputText value="#{msg.ViewPersonnelLabel_idPersonnel}"/>
+                        <h:outputText value="#{personnelController.selected.idPersonnel}" title="#{msg.ViewPersonnelTitle_idPersonnel}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_nomPrenom}"/>
+                        <h:outputText value="#{personnelController.selected.nomPrenom}" title="#{msg.ViewPersonnelTitle_nomPrenom}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_matricule}"/>
+                        <h:outputText value="#{personnelController.selected.matricule}" title="#{msg.ViewPersonnelTitle_matricule}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_cni}"/>
+                        <h:outputText value="#{personnelController.selected.cni}" title="#{msg.ViewPersonnelTitle_cni}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_sexe}"/>
+                        <h:outputText value="#{personnelController.selected.sexe}" title="#{msg.ViewPersonnelTitle_sexe}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_dateNaissance}"/>
+                        <h:outputText value="#{personnelController.selected.dateNaissance}" title="#{msg.ViewPersonnelTitle_dateNaissance}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_lieuNaissance}"/>
+                        <h:outputText value="#{personnelController.selected.lieuNaissance}" title="#{msg.ViewPersonnelTitle_lieuNaissance}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_nationalite}"/>
+                        <h:outputText value="#{personnelController.selected.nationalite}" title="#{msg.ViewPersonnelTitle_nationalite}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_dateRecrutement}"/>
+                        <h:outputText value="#{personnelController.selected.dateRecrutement}" title="#{msg.ViewPersonnelTitle_dateRecrutement}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_photo}"/>
+                        <h:outputText value="#{personnelController.selected.photo}" title="#{msg.ViewPersonnelTitle_photo}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_idService}"/>
+                        <h:outputText value="#{personnelController.selected.idService}" title="#{msg.ViewPersonnelTitle_idService}"/>
+                        <h:outputText value="#{msg.ViewPersonnelLabel_idFonction}"/>
+                        <h:outputText value="#{personnelController.selected.idFonction}" title="#{msg.ViewPersonnelTitle_idFonction}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="PersonnelViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

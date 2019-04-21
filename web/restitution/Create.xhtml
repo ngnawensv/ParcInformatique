@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RestitutionCreateDlg" widgetVar="RestitutionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateRestitutionTitle}">
+            <h:form id="RestitutionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{restitutionController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_idAffectation}" for="idAffectation" />
+                        <p:inputText id="idAffectation" value="#{restitutionController.selected.idAffectation}" title="#{msg.CreateRestitutionTitle_idAffectation}" required="true" requiredMessage="#{msg.CreateRestitutionRequiredMessage_idAffectation}"/>
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_datePriseService}" for="datePriseService" />
+                        <p:calendar id="datePriseService" pattern="MM/dd/yyyy" value="#{restitutionController.selected.datePriseService}" title="#{msg.EditRestitutionTitle_datePriseService}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_dateAffectation}" for="dateAffectation" />
+                        <p:calendar id="dateAffectation" pattern="MM/dd/yyyy" value="#{restitutionController.selected.dateAffectation}" title="#{msg.EditRestitutionTitle_dateAffectation}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_idnvelleatribution}" for="idnvelleatribution" />
+                        <p:inputText id="idnvelleatribution" value="#{restitutionController.selected.idnvelleatribution}" title="#{msg.CreateRestitutionTitle_idnvelleatribution}" />
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_idVehicule}" for="idVehicule" />
+                        <p:selectOneMenu id="idVehicule" value="#{restitutionController.selected.idVehicule}" >
+                            <f:selectItems value="#{vehiculeController.itemsAvailableSelectOne}"
+                                           var="idVehiculeItem"
+                                           itemValue="#{idVehiculeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_idPersonnel}" for="idPersonnel" />
+                        <p:selectOneMenu id="idPersonnel" value="#{restitutionController.selected.idPersonnel}" >
+                            <f:selectItems value="#{personnelController.itemsAvailableSelectOne}"
+                                           var="idPersonnelItem"
+                                           itemValue="#{idPersonnelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateRestitutionLabel_idAttribution}" for="idAttribution" />
+                        <p:selectOneMenu id="idAttribution" value="#{restitutionController.selected.idAttribution}" >
+                            <f:selectItems value="#{attributionController.itemsAvailableSelectOne}"
+                                           var="idAttributionItem"
+                                           itemValue="#{idAttributionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{restitutionController.create}" value="#{msg.Save}" update="display,:RestitutionListForm:datalist,:growl" oncomplete="handleSubmit(args,'RestitutionCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="RestitutionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

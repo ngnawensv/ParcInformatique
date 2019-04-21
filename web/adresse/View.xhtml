@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdresseViewDlg" widgetVar="AdresseViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewAdresseTitle}">
+            <h:form id="AdresseViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{adresseController.selected != null}">
+                        <h:outputText value="#{msg.ViewAdresseLabel_idAdresse}"/>
+                        <h:outputText value="#{adresseController.selected.idAdresse}" title="#{msg.ViewAdresseTitle_idAdresse}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_tel}"/>
+                        <h:outputText value="#{adresseController.selected.tel}" title="#{msg.ViewAdresseTitle_tel}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_email}"/>
+                        <h:outputText value="#{adresseController.selected.email}" title="#{msg.ViewAdresseTitle_email}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_bp}"/>
+                        <h:outputText value="#{adresseController.selected.bp}" title="#{msg.ViewAdresseTitle_bp}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_fax}"/>
+                        <h:outputText value="#{adresseController.selected.fax}" title="#{msg.ViewAdresseTitle_fax}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_siteweb}"/>
+                        <h:outputText value="#{adresseController.selected.siteweb}" title="#{msg.ViewAdresseTitle_siteweb}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_idStructure}"/>
+                        <h:outputText value="#{adresseController.selected.idStructure}" title="#{msg.ViewAdresseTitle_idStructure}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_idPersonnel}"/>
+                        <h:outputText value="#{adresseController.selected.idPersonnel}" title="#{msg.ViewAdresseTitle_idPersonnel}"/>
+                        <h:outputText value="#{msg.ViewAdresseLabel_idGarage}"/>
+                        <h:outputText value="#{adresseController.selected.idGarage}" title="#{msg.ViewAdresseTitle_idGarage}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="AdresseViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

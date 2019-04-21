@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/gpa.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{msg.ListReformeTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ReformeListForm">
+                <p:panel header="#{msg.ListReformeTitle}">
+                    <p:dataTable id="datalist" value="#{reformeController.items}" var="item"
+                                 selectionMode="single" selection="#{reformeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idArrondissement}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_idReforme}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idReforme}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_datemisereforme}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datemisereforme}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_datevente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.datevente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_montantvente}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.montantvente}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_vendu}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.vendu}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListReformeTitle_idVehicule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idVehicule}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{msg.Create}" actionListener="#{reformeController.prepareCreate}" update=":ReformeCreateForm" oncomplete="PF('ReformeCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{msg.View}" update=":ReformeViewForm" oncomplete="PF('ReformeViewDialog').show()" disabled="#{empty reformeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{msg.Edit}" update=":ReformeEditForm" oncomplete="PF('ReformeEditDialog').show()" disabled="#{empty reformeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{msg.Delete}" actionListener="#{reformeController.destroy}" update=":growl,datalist" disabled="#{empty reformeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

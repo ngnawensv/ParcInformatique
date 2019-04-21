@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GarageCreateDlg" widgetVar="GarageCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateGarageTitle}">
+            <h:form id="GarageCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{garageController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateGarageLabel_idGarage}" for="idGarage" />
+                        <p:inputText id="idGarage" value="#{garageController.selected.idGarage}" title="#{msg.CreateGarageTitle_idGarage}" required="true" requiredMessage="#{msg.CreateGarageRequiredMessage_idGarage}"/>
+                        <p:outputLabel value="#{msg.CreateGarageLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{garageController.selected.nom}" title="#{msg.CreateGarageTitle_nom}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{garageController.create}" value="#{msg.Save}" update="display,:GarageListForm:datalist,:growl" oncomplete="handleSubmit(args,'GarageCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="GarageCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

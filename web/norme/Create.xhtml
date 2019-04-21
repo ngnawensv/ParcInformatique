@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NormeCreateDlg" widgetVar="NormeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateNormeTitle}">
+            <h:form id="NormeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{normeController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateNormeLabel_idMarque}" for="idMarque" />
+                        <p:inputText id="idMarque" value="#{normeController.selected.idMarque}" title="#{msg.CreateNormeTitle_idMarque}" required="true" requiredMessage="#{msg.CreateNormeRequiredMessage_idMarque}"/>
+                        <p:outputLabel value="#{msg.CreateNormeLabel_min}" for="min" />
+                        <p:inputText id="min" value="#{normeController.selected.min}" title="#{msg.CreateNormeTitle_min}" />
+                        <p:outputLabel value="#{msg.CreateNormeLabel_max}" for="max" />
+                        <p:inputText id="max" value="#{normeController.selected.max}" title="#{msg.CreateNormeTitle_max}" />
+                        <p:outputLabel value="#{msg.CreateNormeLabel_idTypestructure}" for="idTypestructure" />
+                        <p:selectOneMenu id="idTypestructure" value="#{normeController.selected.idTypestructure}" >
+                            <f:selectItems value="#{typestructureController.itemsAvailableSelectOne}"
+                                           var="idTypestructureItem"
+                                           itemValue="#{idTypestructureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateNormeLabel_idCategorievehicule}" for="idCategorievehicule" />
+                        <p:selectOneMenu id="idCategorievehicule" value="#{normeController.selected.idCategorievehicule}" >
+                            <f:selectItems value="#{categorievehiculeController.itemsAvailableSelectOne}"
+                                           var="idCategorievehiculeItem"
+                                           itemValue="#{idCategorievehiculeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{normeController.create}" value="#{msg.Save}" update="display,:NormeListForm:datalist,:growl" oncomplete="handleSubmit(args,'NormeCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="NormeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

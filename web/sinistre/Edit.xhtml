@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SinistreEditDlg" widgetVar="SinistreEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.EditSinistreTitle}">
+            <h:form id="SinistreEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sinistreController.selected != null}">
+                        <p:outputLabel value="#{msg.EditSinistreLabel_idSinistre}" for="idSinistre" />
+                        <p:inputText id="idSinistre" value="#{sinistreController.selected.idSinistre}" title="#{msg.EditSinistreTitle_idSinistre}" required="true" requiredMessage="#{msg.EditSinistreRequiredMessage_idSinistre}"/>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_datesinistre}" for="datesinistre" />
+                        <p:calendar id="datesinistre" pattern="MM/dd/yyyy" value="#{sinistreController.selected.datesinistre}" title="#{msg.EditSinistreTitle_datesinistre}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_lieusinistre}" for="lieusinistre" />
+                        <p:inputText id="lieusinistre" value="#{sinistreController.selected.lieusinistre}" title="#{msg.EditSinistreTitle_lieusinistre}" />
+                        <p:outputLabel value="#{msg.EditSinistreLabel_montant}" for="montant" />
+                        <p:inputText id="montant" value="#{sinistreController.selected.montant}" title="#{msg.EditSinistreTitle_montant}" />
+                        <p:outputLabel value="#{msg.EditSinistreLabel_immobilisation}" for="immobilisation" />
+                        <p:inputText id="immobilisation" value="#{sinistreController.selected.immobilisation}" title="#{msg.EditSinistreTitle_immobilisation}" />
+                        <p:outputLabel value="#{msg.EditSinistreLabel_datedebut}" for="datedebut" />
+                        <p:calendar id="datedebut" pattern="MM/dd/yyyy" value="#{sinistreController.selected.datedebut}" title="#{msg.EditSinistreTitle_datedebut}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_datefin}" for="datefin" />
+                        <p:calendar id="datefin" pattern="MM/dd/yyyy" value="#{sinistreController.selected.datefin}" title="#{msg.EditSinistreTitle_datefin}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_commentaire}" for="commentaire" />
+                        <p:inputText id="commentaire" value="#{sinistreController.selected.commentaire}" title="#{msg.EditSinistreTitle_commentaire}" />
+                        <p:outputLabel value="#{msg.EditSinistreLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{sinistreController.selected.photo}" title="#{msg.EditSinistreTitle_photo}" />
+                        <p:outputLabel value="#{msg.EditSinistreLabel_idVehicule}" for="idVehicule" />
+                        <p:selectOneMenu id="idVehicule" value="#{sinistreController.selected.idVehicule}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculeController.itemsAvailableSelectOne}"
+                                           var="idVehiculeItem"
+                                           itemValue="#{idVehiculeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_idTypesinistre}" for="idTypesinistre" />
+                        <p:selectOneMenu id="idTypesinistre" value="#{sinistreController.selected.idTypesinistre}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{typesinistreController.itemsAvailableSelectOne}"
+                                           var="idTypesinistreItem"
+                                           itemValue="#{idTypesinistreItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditSinistreLabel_idGarage}" for="idGarage" />
+                        <p:selectOneMenu id="idGarage" value="#{sinistreController.selected.idGarage}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{garageController.itemsAvailableSelectOne}"
+                                           var="idGarageItem"
+                                           itemValue="#{idGarageItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sinistreController.update}" value="#{msg.Save}" update="display,:SinistreListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SinistreEditDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="SinistreEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

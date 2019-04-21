@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ArrondissementViewDlg" widgetVar="ArrondissementViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewArrondissementTitle}">
+            <h:form id="ArrondissementViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{arrondissementController.selected != null}">
+                        <h:outputText value="#{msg.ViewArrondissementLabel_idArrondissement}"/>
+                        <h:outputText value="#{arrondissementController.selected.idArrondissement}" title="#{msg.ViewArrondissementTitle_idArrondissement}"/>
+                        <h:outputText value="#{msg.ViewArrondissementLabel_nom}"/>
+                        <h:outputText value="#{arrondissementController.selected.nom}" title="#{msg.ViewArrondissementTitle_nom}"/>
+                        <h:outputText value="#{msg.ViewArrondissementLabel_idDepartement}"/>
+                        <h:outputText value="#{arrondissementController.selected.idDepartement}" title="#{msg.ViewArrondissementTitle_idDepartement}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="ArrondissementViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

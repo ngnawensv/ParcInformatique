@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeCreateDlg" widgetVar="DemandeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateDemandeTitle}">
+            <h:form id="DemandeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_idDemande}" for="idDemande" />
+                        <p:inputText id="idDemande" value="#{demandeController.selected.idDemande}" title="#{msg.CreateDemandeTitle_idDemande}" required="true" requiredMessage="#{msg.CreateDemandeRequiredMessage_idDemande}"/>
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_intitule}" for="intitule" />
+                        <p:inputText id="intitule" value="#{demandeController.selected.intitule}" title="#{msg.CreateDemandeTitle_intitule}" />
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_anneedemande}" for="anneedemande" />
+                        <p:calendar id="anneedemande" pattern="MM/dd/yyyy" value="#{demandeController.selected.anneedemande}" title="#{msg.EditDemandeTitle_anneedemande}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_qtedemande}" for="qtedemande" />
+                        <p:inputText id="qtedemande" value="#{demandeController.selected.qtedemande}" title="#{msg.CreateDemandeTitle_qtedemande}" />
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_anneeaccord}" for="anneeaccord" />
+                        <p:inputText id="anneeaccord" value="#{demandeController.selected.anneeaccord}" title="#{msg.CreateDemandeTitle_anneeaccord}" />
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_qteaccord}" for="qteaccord" />
+                        <p:inputText id="qteaccord" value="#{demandeController.selected.qteaccord}" title="#{msg.CreateDemandeTitle_qteaccord}" />
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_validation}" for="validation" />
+                        <p:inputText id="validation" value="#{demandeController.selected.validation}" title="#{msg.CreateDemandeTitle_validation}" />
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_idStructure}" for="idStructure" />
+                        <p:selectOneMenu id="idStructure" value="#{demandeController.selected.idStructure}" >
+                            <f:selectItems value="#{structureController.itemsAvailableSelectOne}"
+                                           var="idStructureItem"
+                                           itemValue="#{idStructureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_idModele}" for="idModele" />
+                        <p:selectOneMenu id="idModele" value="#{demandeController.selected.idModele}" >
+                            <f:selectItems value="#{modeleController.itemsAvailableSelectOne}"
+                                           var="idModeleItem"
+                                           itemValue="#{idModeleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateDemandeLabel_idCategorievehicule}" for="idCategorievehicule" />
+                        <p:selectOneMenu id="idCategorievehicule" value="#{demandeController.selected.idCategorievehicule}" >
+                            <f:selectItems value="#{categorievehiculeController.itemsAvailableSelectOne}"
+                                           var="idCategorievehiculeItem"
+                                           itemValue="#{idCategorievehiculeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{demandeController.create}" value="#{msg.Save}" update="display,:DemandeListForm:datalist,:growl" oncomplete="handleSubmit(args,'DemandeCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="DemandeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

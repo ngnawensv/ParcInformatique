@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GarageViewDlg" widgetVar="GarageViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewGarageTitle}">
+            <h:form id="GarageViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{garageController.selected != null}">
+                        <h:outputText value="#{msg.ViewGarageLabel_idGarage}"/>
+                        <h:outputText value="#{garageController.selected.idGarage}" title="#{msg.ViewGarageTitle_idGarage}"/>
+                        <h:outputText value="#{msg.ViewGarageLabel_nom}"/>
+                        <h:outputText value="#{garageController.selected.nom}" title="#{msg.ViewGarageTitle_nom}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="GarageViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

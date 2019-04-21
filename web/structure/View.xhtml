@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StructureViewDlg" widgetVar="StructureViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewStructureTitle}">
+            <h:form id="StructureViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{structureController.selected != null}">
+                        <h:outputText value="#{msg.ViewStructureLabel_idStructure}"/>
+                        <h:outputText value="#{structureController.selected.idStructure}" title="#{msg.ViewStructureTitle_idStructure}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_nom}"/>
+                        <h:outputText value="#{structureController.selected.nom}" title="#{msg.ViewStructureTitle_nom}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_localite}"/>
+                        <h:outputText value="#{structureController.selected.localite}" title="#{msg.ViewStructureTitle_localite}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_active}"/>
+                        <h:outputText value="#{structureController.selected.active}" title="#{msg.ViewStructureTitle_active}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_gpsNord}"/>
+                        <h:outputText value="#{structureController.selected.gpsNord}" title="#{msg.ViewStructureTitle_gpsNord}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_gpsSud}"/>
+                        <h:outputText value="#{structureController.selected.gpsSud}" title="#{msg.ViewStructureTitle_gpsSud}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_idTypestructure}"/>
+                        <h:outputText value="#{structureController.selected.idTypestructure}" title="#{msg.ViewStructureTitle_idTypestructure}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_idStatutstructure}"/>
+                        <h:outputText value="#{structureController.selected.idStatutstructure}" title="#{msg.ViewStructureTitle_idStatutstructure}"/>
+                        <h:outputText value="#{msg.ViewStructureLabel_idArrondissement}"/>
+                        <h:outputText value="#{structureController.selected.idArrondissement}" title="#{msg.ViewStructureTitle_idArrondissement}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="StructureViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

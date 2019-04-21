@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StatutstructureEditDlg" widgetVar="StatutstructureEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.EditStatutstructureTitle}">
+            <h:form id="StatutstructureEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{statutstructureController.selected != null}">
+                        <p:outputLabel value="#{msg.EditStatutstructureLabel_idStatutstructure}" for="idStatutstructure" />
+                        <p:inputText id="idStatutstructure" value="#{statutstructureController.selected.idStatutstructure}" title="#{msg.EditStatutstructureTitle_idStatutstructure}" required="true" requiredMessage="#{msg.EditStatutstructureRequiredMessage_idStatutstructure}"/>
+                        <p:outputLabel value="#{msg.EditStatutstructureLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{statutstructureController.selected.nom}" title="#{msg.EditStatutstructureTitle_nom}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{statutstructureController.update}" value="#{msg.Save}" update="display,:StatutstructureListForm:datalist,:growl" oncomplete="handleSubmit(args, 'StatutstructureEditDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="StatutstructureEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

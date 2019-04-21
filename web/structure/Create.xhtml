@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="StructureCreateDlg" widgetVar="StructureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateStructureTitle}">
+            <h:form id="StructureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{structureController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateStructureLabel_idStructure}" for="idStructure" />
+                        <p:inputText id="idStructure" value="#{structureController.selected.idStructure}" title="#{msg.CreateStructureTitle_idStructure}" required="true" requiredMessage="#{msg.CreateStructureRequiredMessage_idStructure}"/>
+                        <p:outputLabel value="#{msg.CreateStructureLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{structureController.selected.nom}" title="#{msg.CreateStructureTitle_nom}" />
+                        <p:outputLabel value="#{msg.CreateStructureLabel_localite}" for="localite" />
+                        <p:inputText id="localite" value="#{structureController.selected.localite}" title="#{msg.CreateStructureTitle_localite}" />
+                        <p:outputLabel value="#{msg.CreateStructureLabel_active}" for="active" />
+                        <p:inputText id="active" value="#{structureController.selected.active}" title="#{msg.CreateStructureTitle_active}" />
+                        <p:outputLabel value="#{msg.CreateStructureLabel_gpsNord}" for="gpsNord" />
+                        <p:inputText id="gpsNord" value="#{structureController.selected.gpsNord}" title="#{msg.CreateStructureTitle_gpsNord}" />
+                        <p:outputLabel value="#{msg.CreateStructureLabel_gpsSud}" for="gpsSud" />
+                        <p:inputText id="gpsSud" value="#{structureController.selected.gpsSud}" title="#{msg.CreateStructureTitle_gpsSud}" />
+                        <p:outputLabel value="#{msg.CreateStructureLabel_idTypestructure}" for="idTypestructure" />
+                        <p:selectOneMenu id="idTypestructure" value="#{structureController.selected.idTypestructure}" >
+                            <f:selectItems value="#{typestructureController.itemsAvailableSelectOne}"
+                                           var="idTypestructureItem"
+                                           itemValue="#{idTypestructureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateStructureLabel_idStatutstructure}" for="idStatutstructure" />
+                        <p:selectOneMenu id="idStatutstructure" value="#{structureController.selected.idStatutstructure}" >
+                            <f:selectItems value="#{statutstructureController.itemsAvailableSelectOne}"
+                                           var="idStatutstructureItem"
+                                           itemValue="#{idStatutstructureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateStructureLabel_idArrondissement}" for="idArrondissement" />
+                        <p:selectOneMenu id="idArrondissement" value="#{structureController.selected.idArrondissement}" >
+                            <f:selectItems value="#{arrondissementController.itemsAvailableSelectOne}"
+                                           var="idArrondissementItem"
+                                           itemValue="#{idArrondissementItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{structureController.create}" value="#{msg.Save}" update="display,:StructureListForm:datalist,:growl" oncomplete="handleSubmit(args,'StructureCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="StructureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

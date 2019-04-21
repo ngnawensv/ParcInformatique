@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModeleCreateDlg" widgetVar="ModeleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateModeleTitle}">
+            <h:form id="ModeleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{modeleController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateModeleLabel_idModele}" for="idModele" />
+                        <p:inputText id="idModele" value="#{modeleController.selected.idModele}" title="#{msg.CreateModeleTitle_idModele}" required="true" requiredMessage="#{msg.CreateModeleRequiredMessage_idModele}"/>
+                        <p:outputLabel value="#{msg.CreateModeleLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{modeleController.selected.nom}" title="#{msg.CreateModeleTitle_nom}" />
+                        <p:outputLabel value="#{msg.CreateModeleLabel_idMarque}" for="idMarque" />
+                        <p:selectOneMenu id="idMarque" value="#{modeleController.selected.idMarque}" >
+                            <f:selectItems value="#{marqueController.itemsAvailableSelectOne}"
+                                           var="idMarqueItem"
+                                           itemValue="#{idMarqueItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{modeleController.create}" value="#{msg.Save}" update="display,:ModeleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModeleCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="ModeleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

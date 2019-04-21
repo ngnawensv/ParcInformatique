@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/gpa.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{msg.ListVehiculeTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="VehiculeListForm">
+                <p:growl id="growl" showDetail="true"/>
+                <p:panel>
+                    <p:dataTable id="datalist" value="#{vehiculeController.items}" var="item"
+                                 selectionMode="single" selection="#{vehiculeController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idVehicule}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rowIndexVar="index"
+                                 emptyMessage="#{msg.Vide}"
+                                 widgetVar="vehiculeTable"
+                                 draggableColumns="true"
+                                 resizableColumns="true"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="colResize" update=":VehiculeListForm:growl" listener="#{vehiculeController.onResize}" />  
+
+                        <f:facet name="header"> 
+                            <h:outputText value="#{msg.ListVehiculeTitle}"/>
+                            <p:outputPanel style="text-align: right;">  
+                                <p:inputText id="globalFilter" onkeyup="vehiculeTable.filter()" style="width:250px;" placeholder="Recherche" />
+                            </p:outputPanel>  
+                        </f:facet> 
+                        
+                        <p:column style="width: 50px !important; background-color: floralwhite; overflow: visible !important; padding: 2px !important;">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Numero}"/>
+                            </f:facet>
+                            <h:outputText value="#{index+1}"/>
+                        </p:column>
+                        
+                        <p:column sortBy="#{item.immatriculation}" filterBy="#{item.immatriculation}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListVehiculeTitle_immatriculation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.immatriculation}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.dateacquisition}" filterBy="#{item.dateacquisition}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListVehiculeTitle_dateacquisition}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateacquisition}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column sortBy="#{item.coutachatttc}" filterBy="#{item.coutachatttc}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListVehiculeTitle_coutachatttc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.coutachatttc}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.etat}" filterOptions="#" style="width: 150px !important;">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.ListVehiculeTitle_etat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.etat}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idCategorievehicule.nom}" filterBy="#{item.idCategorievehicule.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Categorie_vehicule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCategorievehicule.nom}"/>
+                        </p:column>
+                        <p:column sortBy="#{item.idModele.nom} #{item.idModele.idMarque.nom}" filterBy="#{item.idModele.nom} #{item.idModele.idMarque.nom}">
+                            <f:facet name="header">
+                                <h:outputText value="#{msg.Marque}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idModele.nom} #{item.idModele.idMarque.nom}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{msg.Create}" actionListener="#{vehiculeController.prepareCreate}" update=":VehiculeCreateForm" oncomplete="PF('VehiculeCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{msg.View}" update=":VehiculeViewForm" oncomplete="PF('VehiculeViewDialog').show()" disabled="#{empty vehiculeController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{msg.Edit}" update=":VehiculeEditForm" oncomplete="PF('VehiculeEditDialog').show()" disabled="#{empty vehiculeController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{msg.Delete}" actionListener="#{vehiculeController.destroy}" update=":growl,datalist" disabled="#{empty vehiculeController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

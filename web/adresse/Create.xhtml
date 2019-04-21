@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AdresseCreateDlg" widgetVar="AdresseCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateAdresseTitle}">
+            <h:form id="AdresseCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{adresseController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_idAdresse}" for="idAdresse" />
+                        <p:inputText id="idAdresse" value="#{adresseController.selected.idAdresse}" title="#{msg.CreateAdresseTitle_idAdresse}" required="true" requiredMessage="#{msg.CreateAdresseRequiredMessage_idAdresse}"/>
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_tel}" for="tel" />
+                        <p:inputText id="tel" value="#{adresseController.selected.tel}" title="#{msg.CreateAdresseTitle_tel}" />
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{adresseController.selected.email}" title="#{msg.CreateAdresseTitle_email}" />
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_bp}" for="bp" />
+                        <p:inputText id="bp" value="#{adresseController.selected.bp}" title="#{msg.CreateAdresseTitle_bp}" />
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_fax}" for="fax" />
+                        <p:inputText id="fax" value="#{adresseController.selected.fax}" title="#{msg.CreateAdresseTitle_fax}" />
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_siteweb}" for="siteweb" />
+                        <p:inputText id="siteweb" value="#{adresseController.selected.siteweb}" title="#{msg.CreateAdresseTitle_siteweb}" />
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_idStructure}" for="idStructure" />
+                        <p:selectOneMenu id="idStructure" value="#{adresseController.selected.idStructure}" >
+                            <f:selectItems value="#{structureController.itemsAvailableSelectOne}"
+                                           var="idStructureItem"
+                                           itemValue="#{idStructureItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_idPersonnel}" for="idPersonnel" />
+                        <p:selectOneMenu id="idPersonnel" value="#{adresseController.selected.idPersonnel}" >
+                            <f:selectItems value="#{personnelController.itemsAvailableSelectOne}"
+                                           var="idPersonnelItem"
+                                           itemValue="#{idPersonnelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateAdresseLabel_idGarage}" for="idGarage" />
+                        <p:selectOneMenu id="idGarage" value="#{adresseController.selected.idGarage}" >
+                            <f:selectItems value="#{garageController.itemsAvailableSelectOne}"
+                                           var="idGarageItem"
+                                           itemValue="#{idGarageItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{adresseController.create}" value="#{msg.Save}" update="display,:AdresseListForm:datalist,:growl" oncomplete="handleSubmit(args,'AdresseCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="AdresseCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

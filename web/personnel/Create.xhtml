@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonnelCreateDlg" widgetVar="PersonnelCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreatePersonnelTitle}">
+            <h:form id="PersonnelCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personnelController.selected != null}">
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_idPersonnel}" for="idPersonnel" />
+                        <p:inputText id="idPersonnel" value="#{personnelController.selected.idPersonnel}" title="#{msg.CreatePersonnelTitle_idPersonnel}" required="true" requiredMessage="#{msg.CreatePersonnelRequiredMessage_idPersonnel}"/>
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_nomPrenom}" for="nomPrenom" />
+                        <p:inputText id="nomPrenom" value="#{personnelController.selected.nomPrenom}" title="#{msg.CreatePersonnelTitle_nomPrenom}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_matricule}" for="matricule" />
+                        <p:inputText id="matricule" value="#{personnelController.selected.matricule}" title="#{msg.CreatePersonnelTitle_matricule}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_cni}" for="cni" />
+                        <p:inputText id="cni" value="#{personnelController.selected.cni}" title="#{msg.CreatePersonnelTitle_cni}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_sexe}" for="sexe" />
+                        <p:inputText id="sexe" value="#{personnelController.selected.sexe}" title="#{msg.CreatePersonnelTitle_sexe}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_dateNaissance}" for="dateNaissance" />
+                        <p:calendar id="dateNaissance" pattern="MM/dd/yyyy" value="#{personnelController.selected.dateNaissance}" title="#{msg.EditPersonnelTitle_dateNaissance}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_lieuNaissance}" for="lieuNaissance" />
+                        <p:inputText id="lieuNaissance" value="#{personnelController.selected.lieuNaissance}" title="#{msg.CreatePersonnelTitle_lieuNaissance}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_nationalite}" for="nationalite" />
+                        <p:inputText id="nationalite" value="#{personnelController.selected.nationalite}" title="#{msg.CreatePersonnelTitle_nationalite}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_dateRecrutement}" for="dateRecrutement" />
+                        <p:calendar id="dateRecrutement" pattern="MM/dd/yyyy" value="#{personnelController.selected.dateRecrutement}" title="#{msg.EditPersonnelTitle_dateRecrutement}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{personnelController.selected.photo}" title="#{msg.CreatePersonnelTitle_photo}" />
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_idService}" for="idService" />
+                        <p:selectOneMenu id="idService" value="#{personnelController.selected.idService}" >
+                            <f:selectItems value="#{serviceController.itemsAvailableSelectOne}"
+                                           var="idServiceItem"
+                                           itemValue="#{idServiceItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreatePersonnelLabel_idFonction}" for="idFonction" />
+                        <p:selectOneMenu id="idFonction" value="#{personnelController.selected.idFonction}" >
+                            <f:selectItems value="#{fonctionController.itemsAvailableSelectOne}"
+                                           var="idFonctionItem"
+                                           itemValue="#{idFonctionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personnelController.create}" value="#{msg.Save}" update="display,:PersonnelListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonnelCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="PersonnelCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NormeViewDlg" widgetVar="NormeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewNormeTitle}">
+            <h:form id="NormeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{normeController.selected != null}">
+                        <h:outputText value="#{msg.ViewNormeLabel_idMarque}"/>
+                        <h:outputText value="#{normeController.selected.idMarque}" title="#{msg.ViewNormeTitle_idMarque}"/>
+                        <h:outputText value="#{msg.ViewNormeLabel_min}"/>
+                        <h:outputText value="#{normeController.selected.min}" title="#{msg.ViewNormeTitle_min}"/>
+                        <h:outputText value="#{msg.ViewNormeLabel_max}"/>
+                        <h:outputText value="#{normeController.selected.max}" title="#{msg.ViewNormeTitle_max}"/>
+                        <h:outputText value="#{msg.ViewNormeLabel_idTypestructure}"/>
+                        <h:outputText value="#{normeController.selected.idTypestructure}" title="#{msg.ViewNormeTitle_idTypestructure}"/>
+                        <h:outputText value="#{msg.ViewNormeLabel_idCategorievehicule}"/>
+                        <h:outputText value="#{normeController.selected.idCategorievehicule}" title="#{msg.ViewNormeTitle_idCategorievehicule}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="NormeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FonctionCreateDlg" widgetVar="FonctionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateFonctionTitle}">
+            <h:form id="FonctionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{fonctionController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateFonctionLabel_idFonction}" for="idFonction" />
+                        <p:inputText id="idFonction" value="#{fonctionController.selected.idFonction}" title="#{msg.CreateFonctionTitle_idFonction}" required="true" requiredMessage="#{msg.CreateFonctionRequiredMessage_idFonction}"/>
+                        <p:outputLabel value="#{msg.CreateFonctionLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{fonctionController.selected.nom}" title="#{msg.CreateFonctionTitle_nom}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{fonctionController.create}" value="#{msg.Save}" update="display,:FonctionListForm:datalist,:growl" oncomplete="handleSubmit(args,'FonctionCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="FonctionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

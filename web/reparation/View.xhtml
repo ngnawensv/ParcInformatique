@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReparationViewDlg" widgetVar="ReparationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewReparationTitle}">
+            <h:form id="ReparationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reparationController.selected != null}">
+                        <h:outputText value="#{msg.ViewReparationLabel_idReparation}"/>
+                        <h:outputText value="#{reparationController.selected.idReparation}" title="#{msg.ViewReparationTitle_idReparation}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_datereparation}"/>
+                        <h:outputText value="#{reparationController.selected.datereparation}" title="#{msg.ViewReparationTitle_datereparation}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewReparationLabel_coutreparation}"/>
+                        <h:outputText value="#{reparationController.selected.coutreparation}" title="#{msg.ViewReparationTitle_coutreparation}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_immobilisation}"/>
+                        <h:outputText value="#{reparationController.selected.immobilisation}" title="#{msg.ViewReparationTitle_immobilisation}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_datedebut}"/>
+                        <h:outputText value="#{reparationController.selected.datedebut}" title="#{msg.ViewReparationTitle_datedebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewReparationLabel_datefin}"/>
+                        <h:outputText value="#{reparationController.selected.datefin}" title="#{msg.ViewReparationTitle_datefin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewReparationLabel_commentaire}"/>
+                        <h:outputText value="#{reparationController.selected.commentaire}" title="#{msg.ViewReparationTitle_commentaire}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_idVehicule}"/>
+                        <h:outputText value="#{reparationController.selected.idVehicule}" title="#{msg.ViewReparationTitle_idVehicule}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_idTypereparation}"/>
+                        <h:outputText value="#{reparationController.selected.idTypereparation}" title="#{msg.ViewReparationTitle_idTypereparation}"/>
+                        <h:outputText value="#{msg.ViewReparationLabel_idGarage}"/>
+                        <h:outputText value="#{reparationController.selected.idGarage}" title="#{msg.ViewReparationTitle_idGarage}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="ReparationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

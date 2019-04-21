@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculeCreateDlg" widgetVar="VehiculeCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateVehiculeTitle}">
+            <h:form id="VehiculeCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculeController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idVehicule}" for="idVehicule" />
+                        <p:inputText id="idVehicule" value="#{vehiculeController.selected.idVehicule}" title="#{msg.CreateVehiculeTitle_idVehicule}" required="true" requiredMessage="#{msg.CreateVehiculeRequiredMessage_idVehicule}"/>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_immatriculation}" for="immatriculation" />
+                        <p:inputText id="immatriculation" value="#{vehiculeController.selected.immatriculation}" title="#{msg.CreateVehiculeTitle_immatriculation}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_numchassis}" for="numchassis" />
+                        <p:inputText id="numchassis" value="#{vehiculeController.selected.numchassis}" title="#{msg.CreateVehiculeTitle_numchassis}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_cartegrise}" for="cartegrise" />
+                        <p:inputText id="cartegrise" value="#{vehiculeController.selected.cartegrise}" title="#{msg.CreateVehiculeTitle_cartegrise}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_datemiseenservice}" for="datemiseenservice" />
+                        <p:calendar id="datemiseenservice" pattern="MM/dd/yyyy" value="#{vehiculeController.selected.datemiseenservice}" title="#{msg.EditVehiculeTitle_datemiseenservice}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_nbredeplace}" for="nbredeplace" />
+                        <p:inputText id="nbredeplace" value="#{vehiculeController.selected.nbredeplace}" title="#{msg.CreateVehiculeTitle_nbredeplace}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_dateacquisition}" for="dateacquisition" />
+                        <p:calendar id="dateacquisition" pattern="MM/dd/yyyy" value="#{vehiculeController.selected.dateacquisition}" title="#{msg.EditVehiculeTitle_dateacquisition}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_numserie}" for="numserie" />
+                        <p:inputText id="numserie" value="#{vehiculeController.selected.numserie}" title="#{msg.CreateVehiculeTitle_numserie}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_puissance}" for="puissance" />
+                        <p:inputText id="puissance" value="#{vehiculeController.selected.puissance}" title="#{msg.CreateVehiculeTitle_puissance}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_coutachatttc}" for="coutachatttc" />
+                        <p:inputText id="coutachatttc" value="#{vehiculeController.selected.coutachatttc}" title="#{msg.CreateVehiculeTitle_coutachatttc}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{vehiculeController.selected.description}" title="#{msg.CreateVehiculeTitle_description}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_document}" for="document" />
+                        <p:inputText id="document" value="#{vehiculeController.selected.document}" title="#{msg.CreateVehiculeTitle_document}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_nbresinistre}" for="nbresinistre" />
+                        <p:inputText id="nbresinistre" value="#{vehiculeController.selected.nbresinistre}" title="#{msg.CreateVehiculeTitle_nbresinistre}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_nbrereparation}" for="nbrereparation" />
+                        <p:inputText id="nbrereparation" value="#{vehiculeController.selected.nbrereparation}" title="#{msg.CreateVehiculeTitle_nbrereparation}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_nbrerevision}" for="nbrerevision" />
+                        <p:inputText id="nbrerevision" value="#{vehiculeController.selected.nbrerevision}" title="#{msg.CreateVehiculeTitle_nbrerevision}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{vehiculeController.selected.photo}" title="#{msg.CreateVehiculeTitle_photo}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_etat}" for="etat" />
+                        <p:inputText id="etat" value="#{vehiculeController.selected.etat}" title="#{msg.CreateVehiculeTitle_etat}" />
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idSourcefinancement}" for="idSourcefinancement" />
+                        <p:selectOneMenu id="idSourcefinancement" value="#{vehiculeController.selected.idSourcefinancement}" >
+                            <f:selectItems value="#{sourcefinancementController.itemsAvailableSelectOne}"
+                                           var="idSourcefinancementItem"
+                                           itemValue="#{idSourcefinancementItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idSourceenergie}" for="idSourceenergie" />
+                        <p:selectOneMenu id="idSourceenergie" value="#{vehiculeController.selected.idSourceenergie}" >
+                            <f:selectItems value="#{sourceenergieController.itemsAvailableSelectOne}"
+                                           var="idSourceenergieItem"
+                                           itemValue="#{idSourceenergieItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idModele}" for="idModele" />
+                        <p:selectOneMenu id="idModele" value="#{vehiculeController.selected.idModele}" >
+                            <f:selectItems value="#{modeleController.itemsAvailableSelectOne}"
+                                           var="idModeleItem"
+                                           itemValue="#{idModeleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idModeacquisition}" for="idModeacquisition" />
+                        <p:selectOneMenu id="idModeacquisition" value="#{vehiculeController.selected.idModeacquisition}" >
+                            <f:selectItems value="#{modeacquisitionController.itemsAvailableSelectOne}"
+                                           var="idModeacquisitionItem"
+                                           itemValue="#{idModeacquisitionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.CreateVehiculeLabel_idCategorievehicule}" for="idCategorievehicule" />
+                        <p:selectOneMenu id="idCategorievehicule" value="#{vehiculeController.selected.idCategorievehicule}" >
+                            <f:selectItems value="#{categorievehiculeController.itemsAvailableSelectOne}"
+                                           var="idCategorievehiculeItem"
+                                           itemValue="#{idCategorievehiculeItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculeController.create}" value="#{msg.Save}" update="display,:VehiculeListForm:datalist,:growl" oncomplete="handleSubmit(args,'VehiculeCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="VehiculeCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

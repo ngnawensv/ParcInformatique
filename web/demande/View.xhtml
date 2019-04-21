@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DemandeViewDlg" widgetVar="DemandeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewDemandeTitle}">
+            <h:form id="DemandeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{demandeController.selected != null}">
+                        <h:outputText value="#{msg.ViewDemandeLabel_idDemande}"/>
+                        <h:outputText value="#{demandeController.selected.idDemande}" title="#{msg.ViewDemandeTitle_idDemande}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_intitule}"/>
+                        <h:outputText value="#{demandeController.selected.intitule}" title="#{msg.ViewDemandeTitle_intitule}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_anneedemande}"/>
+                        <h:outputText value="#{demandeController.selected.anneedemande}" title="#{msg.ViewDemandeTitle_anneedemande}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewDemandeLabel_qtedemande}"/>
+                        <h:outputText value="#{demandeController.selected.qtedemande}" title="#{msg.ViewDemandeTitle_qtedemande}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_anneeaccord}"/>
+                        <h:outputText value="#{demandeController.selected.anneeaccord}" title="#{msg.ViewDemandeTitle_anneeaccord}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_qteaccord}"/>
+                        <h:outputText value="#{demandeController.selected.qteaccord}" title="#{msg.ViewDemandeTitle_qteaccord}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_validation}"/>
+                        <h:outputText value="#{demandeController.selected.validation}" title="#{msg.ViewDemandeTitle_validation}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_idStructure}"/>
+                        <h:outputText value="#{demandeController.selected.idStructure}" title="#{msg.ViewDemandeTitle_idStructure}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_idModele}"/>
+                        <h:outputText value="#{demandeController.selected.idModele}" title="#{msg.ViewDemandeTitle_idModele}"/>
+                        <h:outputText value="#{msg.ViewDemandeLabel_idCategorievehicule}"/>
+                        <h:outputText value="#{demandeController.selected.idCategorievehicule}" title="#{msg.ViewDemandeTitle_idCategorievehicule}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="DemandeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ArrondissementCreateDlg" widgetVar="ArrondissementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.CreateArrondissementTitle}">
+            <h:form id="ArrondissementCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{arrondissementController.selected != null}">
+                        <p:outputLabel value="#{msg.CreateArrondissementLabel_idArrondissement}" for="idArrondissement" />
+                        <p:inputText id="idArrondissement" value="#{arrondissementController.selected.idArrondissement}" title="#{msg.CreateArrondissementTitle_idArrondissement}" required="true" requiredMessage="#{msg.CreateArrondissementRequiredMessage_idArrondissement}"/>
+                        <p:outputLabel value="#{msg.CreateArrondissementLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{arrondissementController.selected.nom}" title="#{msg.CreateArrondissementTitle_nom}" />
+                        <p:outputLabel value="#{msg.CreateArrondissementLabel_idDepartement}" for="idDepartement" />
+                        <p:selectOneMenu id="idDepartement" value="#{arrondissementController.selected.idDepartement}" >
+                            <f:selectItems value="#{departementController.itemsAvailableSelectOne}"
+                                           var="idDepartementItem"
+                                           itemValue="#{idDepartementItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{arrondissementController.create}" value="#{msg.Save}" update="display,:ArrondissementListForm:datalist,:growl" oncomplete="handleSubmit(args,'ArrondissementCreateDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="ArrondissementCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

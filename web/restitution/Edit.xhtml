@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RestitutionEditDlg" widgetVar="RestitutionEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.EditRestitutionTitle}">
+            <h:form id="RestitutionEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{restitutionController.selected != null}">
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_idAffectation}" for="idAffectation" />
+                        <p:inputText id="idAffectation" value="#{restitutionController.selected.idAffectation}" title="#{msg.EditRestitutionTitle_idAffectation}" required="true" requiredMessage="#{msg.EditRestitutionRequiredMessage_idAffectation}"/>
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_datePriseService}" for="datePriseService" />
+                        <p:calendar id="datePriseService" pattern="MM/dd/yyyy" value="#{restitutionController.selected.datePriseService}" title="#{msg.EditRestitutionTitle_datePriseService}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_dateAffectation}" for="dateAffectation" />
+                        <p:calendar id="dateAffectation" pattern="MM/dd/yyyy" value="#{restitutionController.selected.dateAffectation}" title="#{msg.EditRestitutionTitle_dateAffectation}"  showOn="button"/>
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_idnvelleatribution}" for="idnvelleatribution" />
+                        <p:inputText id="idnvelleatribution" value="#{restitutionController.selected.idnvelleatribution}" title="#{msg.EditRestitutionTitle_idnvelleatribution}" />
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_idVehicule}" for="idVehicule" />
+                        <p:selectOneMenu id="idVehicule" value="#{restitutionController.selected.idVehicule}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculeController.itemsAvailableSelectOne}"
+                                           var="idVehiculeItem"
+                                           itemValue="#{idVehiculeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_idPersonnel}" for="idPersonnel" />
+                        <p:selectOneMenu id="idPersonnel" value="#{restitutionController.selected.idPersonnel}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{personnelController.itemsAvailableSelectOne}"
+                                           var="idPersonnelItem"
+                                           itemValue="#{idPersonnelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{msg.EditRestitutionLabel_idAttribution}" for="idAttribution" />
+                        <p:selectOneMenu id="idAttribution" value="#{restitutionController.selected.idAttribution}" >
+                            <f:selectItem itemLabel="#{msg.SelectOneMessage}"/>
+                            <f:selectItems value="#{attributionController.itemsAvailableSelectOne}"
+                                           var="idAttributionItem"
+                                           itemValue="#{idAttributionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{restitutionController.update}" value="#{msg.Save}" update="display,:RestitutionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RestitutionEditDialog');"/>
+                    <p:commandButton value="#{msg.Cancel}" onclick="RestitutionEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

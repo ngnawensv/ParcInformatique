@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SinistreViewDlg" widgetVar="SinistreViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewSinistreTitle}">
+            <h:form id="SinistreViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sinistreController.selected != null}">
+                        <h:outputText value="#{msg.ViewSinistreLabel_idSinistre}"/>
+                        <h:outputText value="#{sinistreController.selected.idSinistre}" title="#{msg.ViewSinistreTitle_idSinistre}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_datesinistre}"/>
+                        <h:outputText value="#{sinistreController.selected.datesinistre}" title="#{msg.ViewSinistreTitle_datesinistre}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewSinistreLabel_lieusinistre}"/>
+                        <h:outputText value="#{sinistreController.selected.lieusinistre}" title="#{msg.ViewSinistreTitle_lieusinistre}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_montant}"/>
+                        <h:outputText value="#{sinistreController.selected.montant}" title="#{msg.ViewSinistreTitle_montant}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_immobilisation}"/>
+                        <h:outputText value="#{sinistreController.selected.immobilisation}" title="#{msg.ViewSinistreTitle_immobilisation}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_datedebut}"/>
+                        <h:outputText value="#{sinistreController.selected.datedebut}" title="#{msg.ViewSinistreTitle_datedebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewSinistreLabel_datefin}"/>
+                        <h:outputText value="#{sinistreController.selected.datefin}" title="#{msg.ViewSinistreTitle_datefin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{msg.ViewSinistreLabel_commentaire}"/>
+                        <h:outputText value="#{sinistreController.selected.commentaire}" title="#{msg.ViewSinistreTitle_commentaire}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_photo}"/>
+                        <h:outputText value="#{sinistreController.selected.photo}" title="#{msg.ViewSinistreTitle_photo}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_idVehicule}"/>
+                        <h:outputText value="#{sinistreController.selected.idVehicule}" title="#{msg.ViewSinistreTitle_idVehicule}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_idTypesinistre}"/>
+                        <h:outputText value="#{sinistreController.selected.idTypesinistre}" title="#{msg.ViewSinistreTitle_idTypesinistre}"/>
+                        <h:outputText value="#{msg.ViewSinistreLabel_idGarage}"/>
+                        <h:outputText value="#{sinistreController.selected.idGarage}" title="#{msg.ViewSinistreTitle_idGarage}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="SinistreViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MoisViewDlg" widgetVar="MoisViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{msg.ViewMoisTitle}">
+            <h:form id="MoisViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moisController.selected != null}">
+                        <h:outputText value="#{msg.ViewMoisLabel_idAnnee}"/>
+                        <h:outputText value="#{moisController.selected.idAnnee}" title="#{msg.ViewMoisTitle_idAnnee}"/>
+                        <h:outputText value="#{msg.ViewMoisLabel_nom}"/>
+                        <h:outputText value="#{moisController.selected.nom}" title="#{msg.ViewMoisTitle_nom}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{msg.Close}" onclick="MoisViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
